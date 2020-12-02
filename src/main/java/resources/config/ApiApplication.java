@@ -1,6 +1,6 @@
 package resources.config;
 
-import resources.FirstResource;
+import resources.YounglingResource;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -13,7 +13,7 @@ public class ApiApplication extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> set = new HashSet<>();
-        set.add(FirstResource.class);
+        set.add(YounglingResource.class);
         return set;
     }
 }
