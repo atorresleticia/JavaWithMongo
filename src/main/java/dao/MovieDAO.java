@@ -16,4 +16,6 @@ public interface MovieDAO {
     String update(String id, Movie movie, ServletContext context);
 
     Long delete(String id, ServletContext context);
+
+    Movie findByName(String name, ServletContext context);
 }

@@ -14,7 +14,7 @@ import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.types.ObjectId;
-import utils.converter.Constants;
+import utils.Constants;
 
 import javax.servlet.ServletContext;
 import java.lang.reflect.Field;
@@ -41,16 +41,7 @@ public class MovieDAOImpl implements MovieDAO {
         BasicDBObject searchQuery = new BasicDBObject();
         searchQuery.put("_id", new ObjectId(id));
 
-        FindIterable<Movie> movie = getCollection(context).find(searchQuery);
-        if (movie != null) {
-            MongoCursor<Movie> iterator = movie.iterator();
-
-            while (iterator.hasNext()) {
-                return iterator.next();
-            }
-        }
-
-        return null;
+        return find(context, searchQuery);
     }
 
     @Override
@@ -74,39 +65,12 @@ public class MovieDAOImpl implements MovieDAO {
     @Override
     public String update(String id, Movie movie, ServletContext context) {
 
-        Movie dbMovie = this.find(id, context);
-        movie = getEntityToUpdate(dbMovie, movie);
-
         Document filterById = new Document("_id", new ObjectId(id));
         FindOneAndReplaceOptions returnDocAfterReplace = new FindOneAndReplaceOptions().returnDocument(ReturnDocument.AFTER);
 
         Movie updatedMovie = getCollection(context).findOneAndReplace(filterById, movie, returnDocAfterReplace);
 
         return updatedMovie.getId().toString();
-    }
-
-    private Movie getEntityToUpdate(Movie dbMovie, Movie movie) {
-
-        Field[] fields = Movie.class.getDeclaredFields();
-
-        for (Field field : fields) {
-
-            try {
-                field.setAccessible(true);
-
-                Object dbValue = field.get(dbMovie);
-                Object value = field.get(movie);
-
-                if (value == null || value.equals(dbValue)) {
-                    field.set(movie, dbValue);
-                }
-
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return movie;
     }
 
     @Override
@@ -116,6 +80,30 @@ public class MovieDAOImpl implements MovieDAO {
         DeleteResult result = getCollection(context).deleteOne(filterById);
 
         return result.getDeletedCount();
+    }
+
+    @Override
+    public Movie findByName(String name, ServletContext context) {
+
+        BasicDBObject searchQuery = new BasicDBObject();
+        searchQuery.put("name", name);
+
+        return find(context, searchQuery);
+    }
+
+    private Movie find(ServletContext context, BasicDBObject searchQuery) {
+
+        FindIterable<Movie> movie = getCollection(context).find(searchQuery);
+
+        if (movie != null) {
+            MongoCursor<Movie> iterator = movie.iterator();
+
+            while (iterator.hasNext()) {
+                return iterator.next();
+            }
+        }
+
+        return null;
     }
 
     private MongoClient getMongoClient(ServletContext context) {

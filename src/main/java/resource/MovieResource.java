@@ -1,5 +1,6 @@
 package resource;
 
+import org.bson.types.ObjectId;
 import utils.converter.MovieConverter;
 import dto.MovieDTO;
 import model.Movie;
@@ -28,7 +29,7 @@ public class MovieResource {
     @POST
     public Response insert(MovieDTO dto) {
         String idInserted = service.insert(new MovieConverter().toModel(dto), context);
-        return Response.ok(idInserted).build();
+        return Response.ok(new ObjectId(idInserted)).build();
     }
 
     @GET
@@ -59,7 +60,7 @@ public class MovieResource {
     @Path("{id}")
     public Response update(@PathParam("id") String id, MovieDTO dto) {
         String idUpdated = service.update(id, new MovieConverter().toModel(dto), context);
-        return Response.ok(idUpdated).build();
+        return Response.ok(new ObjectId(idUpdated)).build();
     }
 
     @DELETE

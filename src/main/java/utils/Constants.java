@@ -1,4 +1,4 @@
-package utils.converter;
+package utils;
 
 public class Constants {
 
