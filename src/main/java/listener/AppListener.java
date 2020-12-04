@@ -1,8 +1,6 @@
 package listener;
 
 import com.mongodb.MongoClient;
-import org.bson.codecs.configuration.CodecRegistry;
-import org.bson.codecs.pojo.PojoCodecProvider;
 import utils.converter.Constants;
 
 import javax.servlet.ServletContext;
@@ -11,9 +9,6 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.text.MessageFormat;
 import java.util.logging.Logger;
-
-import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
-import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 @WebListener
 public class AppListener implements ServletContextListener {
