@@ -1,19 +1,21 @@
 package dto;
 
+import java.math.BigDecimal;
+
 public class MovieDTO {
 
     private String id;
 
     private String name;
 
-    private int rating;
+    private BigDecimal rating;
 
     private Long year;
 
     public MovieDTO() {
     }
 
-    public MovieDTO(String id, String name, int rating, Long year) {
+    public MovieDTO(String id, String name, BigDecimal rating, Long year) {
         this.id = id;
         this.name = name;
         this.rating = rating;
@@ -36,11 +38,11 @@ public class MovieDTO {
         this.name = name;
     }
 
-    public int getRating() {
+    public BigDecimal getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(BigDecimal rating) {
         this.rating = rating;
     }
 

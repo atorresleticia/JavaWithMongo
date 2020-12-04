@@ -2,13 +2,15 @@ package model;
 
 import org.bson.types.ObjectId;
 
+import java.math.BigDecimal;
+
 public class Movie {
 
     private ObjectId id;
 
     private String name;
 
-    private int rating;
+    private BigDecimal rating;
 
     private Long year;
 
@@ -31,11 +33,11 @@ public class Movie {
         this.name = name;
     }
 
-    public int getRating() {
+    public BigDecimal getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(BigDecimal rating) {
         this.rating = rating;
     }
 

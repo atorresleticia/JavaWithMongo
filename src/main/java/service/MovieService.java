@@ -2,18 +2,18 @@ package service;
 
 import model.Movie;
 
+import javax.servlet.ServletContext;
 import java.util.List;
 
 public interface MovieService {
 
-    String insert(Movie movie);
+    String insert(Movie movie, ServletContext context);
 
-    Movie find(String id);
+    Movie find(String id, ServletContext context);
 
-    List<Movie> find();
+    List<Movie> find(ServletContext context);
 
-    String update(Movie movie);
+    String update(String id, Movie movie, ServletContext context);
 
-    Long delete(String id);
-
+    Long delete(String id, ServletContext context);
 }

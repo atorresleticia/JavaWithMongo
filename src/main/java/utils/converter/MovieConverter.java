@@ -12,17 +12,17 @@ import java.util.List;
 public class MovieConverter {
 
     public Movie toModel(MovieDTO dto) {
+
         Movie movie = new Movie();
 
         try {
             BeanUtils.copyProperties(movie, dto);
-
-            if (dto.getId() != null) {
-                movie.setId(new ObjectId(dto.getId()));
-            }
-
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
+        }
+
+        if (dto.getId() != null) {
+            movie.setId(new ObjectId(dto.getId()));
         }
 
         return movie;
@@ -34,11 +34,11 @@ public class MovieConverter {
 
         try {
             BeanUtils.copyProperties(dto, movie);
-            dto.setId(movie.getId().toString());
-
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
+
+        dto.setId(movie.getId().toString());
 
         return dto;
     }
@@ -62,5 +62,4 @@ public class MovieConverter {
 
         return dtos;
     }
-
 }

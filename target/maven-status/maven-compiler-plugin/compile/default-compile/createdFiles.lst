@@ -1,5 +1,12 @@
 resource\config\ApiApplication.class
-resource\YounglingResource.class
+daoImpl\MovieDAOImpl.class
+dto\MovieDTO.class
 model\Movie.class
 service\MovieService.class
+listener\AppListener.class
+dao\MovieDAO.class
+utils\converter\MovieConverter.class
+resource\YounglingResource.class
+serviceImpl\MovieServiceImpl.class
+utils\converter\Constants.class
 resource\MovieResource.class
