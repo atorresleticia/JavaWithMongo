@@ -1,4 +1,4 @@
-# JavaWithMongo
+# Java With MongoDB
 
 Project for playing around with Java and MongoDB.
 
